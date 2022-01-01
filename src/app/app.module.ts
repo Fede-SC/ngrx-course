@@ -62,7 +62,7 @@ const routes: Routes = [
     // 25 versioni dei nostri dati
     // con logOnly speciichiamo che vogliamo i dev tools spenti in 
     // production
-    StoreDevtoolsModule.instrument({maxAge: 25, logOnly: environment.production})
+    StoreDevtoolsModule.instrument({maxAge: 25, logOnly: environment.production}),
   ],
   bootstrap: [AppComponent]
 })
