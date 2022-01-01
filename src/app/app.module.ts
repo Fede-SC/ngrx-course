@@ -21,6 +21,7 @@ import {RouterState, StoreRouterConnectingModule} from '@ngrx/router-store';
 import {EffectsModule} from '@ngrx/effects';
 import {EntityDataModule} from '@ngrx/data';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { reducers, metaReducers } from './reducers';
 
 
 const routes: Routes = [
@@ -51,7 +52,17 @@ const routes: Routes = [
     MatProgressSpinnerModule,
     MatListModule,
     MatToolbarModule,
-    AuthModule.forRoot()
+    AuthModule.forRoot(),
+    // ng add @ngrx/store
+    // Implementiamo l'ngrx module nella root dell'applicazione.
+    // e implementiamo i servizi che implementa questo modulo
+    StoreModule.forRoot(reducers, { metaReducers }),
+    // ng add @ngrx/store-devtools
+    // maxAge significa che vogliamo tenere in memoria le ultime
+    // 25 versioni dei nostri dati
+    // con logOnly speciichiamo che vogliamo i dev tools spenti in 
+    // production
+    StoreDevtoolsModule.instrument({maxAge: 25, logOnly: environment.production})
   ],
   bootstrap: [AppComponent]
 })
