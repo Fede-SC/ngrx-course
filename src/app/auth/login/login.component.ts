@@ -7,6 +7,7 @@ import {AuthService} from "../auth.service";
 import {tap} from "rxjs/operators";
 import {noop} from "rxjs";
 import {Router} from "@angular/router";
+import { AppState } from '../../reducers';
 
 @Component({
   selector: 'login',
@@ -20,7 +21,8 @@ export class LoginComponent implements OnInit {
   constructor(
       private fb:FormBuilder,
       private auth: AuthService,
-      private router:Router) {
+      private router:Router,
+      private store: Store<AppState>) {
 
       this.form = fb.group({
           email: ['test@angular-university.io', [Validators.required]],
@@ -34,7 +36,19 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-
+    const val = this.form.value;
+    this.auth.login(val.email, val.password)
+      .pipe(
+        tap(user => {
+          console.log(user);
+          // l'unico modo per modficare i dati all'interno dello
+          // store è utilizzare il metodo dispatch il quale
+          // prende in ingresso un argomento: una action
+          //this.store.dispatch();
+          this.router.navigateByUrl('/courses');
+        })
+      )
+      .subscribe(noop, () => alert('Login failed'))
   }
 
 }
