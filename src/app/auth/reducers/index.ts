@@ -16,6 +16,8 @@ export const initialAuthState: AuthState = {
     user: undefined
 };
 
+// nel reducer definiamo il nostro stato e la logica delle nostre
+// action
 export const authReducer = createReducer(
 
     initialAuthState,
