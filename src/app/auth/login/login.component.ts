@@ -8,6 +8,7 @@ import {tap} from "rxjs/operators";
 import {noop} from "rxjs";
 import {Router} from "@angular/router";
 import { AppState } from '../../reducers';
+import { login } from '../auth.actions';
 
 @Component({
   selector: 'login',
@@ -44,7 +45,17 @@ export class LoginComponent implements OnInit {
           // l'unico modo per modficare i dati all'interno dello
           // store è utilizzare il metodo dispatch il quale
           // prende in ingresso un argomento: una action
-          //this.store.dispatch();
+          // il parametro user verrà passato come payload
+          this.store.dispatch(login({user}));
+          // this.store.dispatch({
+          //     // nome della action per lanciare un evento nello store
+          //   type: 'Login Action',
+          //   // il payload è la nuova versione di un dato contenuto
+          //   // dello stato interno
+          //   payload: {
+          //     user
+          //   }
+          // });
           this.router.navigateByUrl('/courses');
         })
       )
