@@ -3,6 +3,7 @@ import { AuthState } from "./reducers";
 
 // Questa featre selector prende come unico elemento il nome
 // della property in cui noi vogliamo accedere nello stato globale
+// auth è il nome del reducer che stiamo utilizzando
 export const selectAuthState =
   createFeatureSelector<AuthState>("auth");
 
