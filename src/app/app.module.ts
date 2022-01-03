@@ -65,6 +65,10 @@ const routes: Routes = [
     // con logOnly speciichiamo che vogliamo i dev tools spenti in
     // production
     StoreDevtoolsModule.instrument({maxAge: 25, logOnly: environment.production}),
+    // Gli effects utilizzano flussi per fornire
+    // nuove fonti di azioni per ridurre
+    // lo stato in basea interazioni esterne
+    EffectsModule.forRoot([])
   ],
   bootstrap: [AppComponent]
 })

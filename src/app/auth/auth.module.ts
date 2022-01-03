@@ -22,7 +22,8 @@ import { AuthGuard } from './auth.guard';
         RouterModule.forChild([{path: '', component: LoginComponent}]),
         // ng g store auth/Auth --module auth.module.ts
         // per aggiungere ngrx al modulo di auth
-        StoreModule.forFeature('auth', authReducer)
+        StoreModule.forFeature('auth', authReducer),
+        EffectsModule.forFeature([])
     ],
     declarations: [LoginComponent],
     exports: [LoginComponent]
