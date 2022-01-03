@@ -1,4 +1,5 @@
 import { Injectable } from "@angular/core";
+import { Router } from "@angular/router";
 import { act, Actions, createEffect, ofType } from "@ngrx/effects";
 import { tap } from "rxjs/operators";
 import { AuthActions } from "./action-types";
@@ -17,7 +18,19 @@ export class AuthEffects {
       // specifichiamo che questo particolare side effect non
       // è un risultato di un dispatch
     ), {dispatch: false});
-  constructor(private actions$: Actions) {
+
+  logout$ = createEffect(() =>
+    this.actions$
+      .pipe(
+        ofType(AuthActions.logout),
+        tap(action => {
+          localStorage.removeItem('user');
+          this.router.navigateByUrl('/login');
+        })
+      ));
+  constructor(
+    private actions$: Actions,
+    private router: Router) {
     // actions$.subscribe(action => {
     //   // se si tratta dell'azione di login
     //   if (action.type === '[Login Page] User Login') {
