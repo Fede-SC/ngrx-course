@@ -4,6 +4,7 @@ import {Observable} from "rxjs";
 import {map} from 'rxjs/operators';
 import {NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router} from '@angular/router';
 import { AppState } from './reducers';
+import { isLoggedIn, isLoggedOut } from './auth/auth.selectors';
 
 @Component({
   selector: 'app-root',
@@ -46,11 +47,18 @@ export class AppComponent implements OnInit {
           // accediamo all'auth property dello state
           // e controlliamo se il profilo utente sia disponibile o no
           // convertendo questo valore in un booleano
-          map(state => !!state['auth'].user)
+          // L'operatore select di ngrx fa il mapping del valore
+          // (come map) + effettua l'eliminazione dei duplicati
+          // della stessa operazione in modo da migliorare le
+          // performance e pulire al pisogno la memory cache
+          //select(state => !!state['auth'].user)
+          // in sostituzione possiamo creare un selettore apposito
+          select(isLoggedIn)
         );
       this.isLoggedOut$ = this.store
         .pipe(
-          map(state => !state['auth'].user)
+          //select(state => !state['auth'].user)
+          select(isLoggedOut)
         );
     }
 
