@@ -11,6 +11,7 @@ import {AuthService} from "./auth.service";
 import { EffectsModule } from '@ngrx/effects';
 import { authReducer } from './reducers';
 import { AuthGuard } from './auth.guard';
+import { AuthEffects } from './auth.effects';
 
 @NgModule({
     imports: [
@@ -23,7 +24,7 @@ import { AuthGuard } from './auth.guard';
         // ng g store auth/Auth --module auth.module.ts
         // per aggiungere ngrx al modulo di auth
         StoreModule.forFeature('auth', authReducer),
-        EffectsModule.forFeature([])
+        EffectsModule.forFeature([AuthEffects])
     ],
     declarations: [LoginComponent],
     exports: [LoginComponent]
