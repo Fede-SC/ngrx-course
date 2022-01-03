@@ -47,6 +47,7 @@ export class AppComponent implements OnInit {
           // accediamo all'auth property dello state
           // e controlliamo se il profilo utente sia disponibile o no
           // convertendo questo valore in un booleano
+          // I selector mappano le funzioni in memoria
           // L'operatore select di ngrx fa il mapping del valore
           // (come map) + effettua l'eliminazione dei duplicati
           // della stessa operazione in modo da migliorare le

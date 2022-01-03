@@ -1,8 +1,16 @@
-import { createSelector } from "@ngrx/store";
+import { createFeatureSelector, createSelector } from "@ngrx/store";
+import { AuthState } from "./reducers";
+
+// Questa featre selector prende come unico elemento il nome
+// della property in cui noi vogliamo accedere nello stato globale
+export const selectAuthState =
+  createFeatureSelector<AuthState>("auth");
 
 export const isLoggedIn = createSelector(
-  state => state['auth'],
-  (auth) => !!auth.user
+  //state => state['auth'],
+  // in sostituzione possiamo usare la feature selector
+  selectAuthState,
+  auth => !!auth.user
 );
 
 export const isLoggedOut = createSelector(
