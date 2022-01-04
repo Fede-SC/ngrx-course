@@ -58,7 +58,20 @@ const routes: Routes = [
     // ng add @ngrx/store
     // Implementiamo l'ngrx module nella root dell'applicazione.
     // e implementiamo i servizi che implementa questo modulo
-    StoreModule.forRoot(reducers, { metaReducers }),
+    StoreModule.forRoot(reducers, {
+      metaReducers,
+      runtimeChecks: {
+        // con questa impostazione siamo sicuri che lo stato
+        // nello store non sia mai mutato accidentalemente
+        strictStateImmutability: true,
+        // con questa impostazione siamo sicuri che l'oggetto
+        // action non venga mai mutato accidentalemente
+        strictActionImmutability: true,
+        // rende l'oggetto action e lo state serializzabile
+        strictActionSerializability: true,
+        strictStateSerializability: true
+      }
+    }),
     // ng add @ngrx/store-devtools
     // maxAge significa che vogliamo tenere in memoria le ultime
     // 25 versioni dei nostri dati
