@@ -16,6 +16,8 @@ export const reducers: ActionReducerMap<AppState> = {
   router: routerReducer
 };
 
+// il metareducer prende un reducer, aggiunge delle
+// istruzioni e restituisce un nuovo reducer
 export function logger(reducer:ActionReducer<any>)
   : ActionReducer<any> {
   return (state, action) => {
