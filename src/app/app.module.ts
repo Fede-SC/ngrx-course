@@ -68,7 +68,12 @@ const routes: Routes = [
     // Gli effects utilizzano flussi per fornire
     // nuove fonti di azioni per ridurre
     // lo stato in basea interazioni esterne
-    EffectsModule.forRoot([])
+    EffectsModule.forRoot([]),
+    // Connette il routermodule con lo store module
+    StoreRouterConnectingModule.forRoot({
+      stateKey: 'router',
+      routerState: RouterState.Minimal
+    })
   ],
   bootstrap: [AppComponent]
 })
