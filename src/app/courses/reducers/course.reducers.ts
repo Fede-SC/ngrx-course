@@ -32,6 +32,8 @@ export const coursesReducer = createReducer(
 
   on(CourseActions.allCoursesLoaded,
     // addAll(action.payload, state)
+    // addAll inserisce un range di valori
+    // allo store
     (state, action) => adapter.addAll(
       action.courses,
       {
@@ -39,7 +41,12 @@ export const coursesReducer = createReducer(
         // una volta che i corsi sono caricati settiamo la
         // variabile a true
         allCoursesLoaded: true
-      }))
+      })),
+
+  // updateOne modifica uno specifico
+  // elemento allo store
+  on(CourseActions.courseUpdated, (state, action) =>
+    adapter.updateOne(action.update, state))
 );
 
 // selectAll: select all enitites (course)
