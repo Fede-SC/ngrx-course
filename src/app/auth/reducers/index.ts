@@ -9,7 +9,7 @@ import {User} from '../model/user.model';
 import {AuthActions} from '../action-types';
 
 export interface AuthState {
-    user: User
+  user: User
 }
 
 export const initialAuthState: AuthState = {
