@@ -27,3 +27,6 @@ export const coursesReducer = createReducer(
     // addAll(action.payload, state)
     (state, action) => adapter.addAll(action.courses, state))
 );
+
+// selectAll: select all enitites (course)
+export const {selectAll} = adapter.getSelectors();
