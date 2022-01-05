@@ -1,10 +1,11 @@
 import { Injectable } from "@angular/core";
 import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from "@angular/router";
-import { Store } from "@ngrx/store";
+import { select, Store } from "@ngrx/store";
 import { Observable } from "rxjs";
-import { finalize, first, tap } from "rxjs/operators";
+import { filter, finalize, first, tap } from "rxjs/operators";
 import { AppState } from "../reducers";
 import { loadAllCourses } from "./course.actions";
+import { areCoursesLoaded } from "./courses.selector";
 
 // Il router resolver è un particolare servizio che viene
 // eseguito prima che il router completa una sua navigazione
@@ -20,12 +21,14 @@ export class CoursesResolver implements Resolve<any> {
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> {
     return this.store
       .pipe(
-        tap(() => {
-          if (!this.loading) {
+        select(areCoursesLoaded),
+        tap(coursesLoaded => {
+          if (!this.loading && !coursesLoaded) {
             this.loading = true;
             this.store.dispatch(loadAllCourses());
           }
         }),
+        filter(coursesLoaded => coursesLoaded),
         first(),
         finalize(() => this.loading = false)
       );

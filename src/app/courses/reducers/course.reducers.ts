@@ -7,9 +7,11 @@ import { compareCourses, Course } from "../model/course";
 export interface CoursesState extends EntityState<Course> {
   // Contiene un dictionary di entities memorizzati da
   // ciascun id
-  entities: {[key: number]: Course};
+  //entities: {[key: number]: Course};
   // array che definisce il naturale ordine delle entità
-  ids: number[]
+  //ids: number[]
+  // booleano che definisce il caricamento dei corsi
+  allCoursesLoaded: boolean
 }
 
 export const adapter = createEntityAdapter<Course>({
@@ -21,14 +23,23 @@ export const adapter = createEntityAdapter<Course>({
 // in nostro reduer in modo semplice
 
 // initialState
-export const initialCoursesState = adapter.getInitialState();
+export const initialCoursesState = adapter.getInitialState({
+  allCoursesLoaded: false
+});
 
 export const coursesReducer = createReducer(
   initialCoursesState,
 
   on(CourseActions.allCoursesLoaded,
     // addAll(action.payload, state)
-    (state, action) => adapter.addAll(action.courses, state))
+    (state, action) => adapter.addAll(
+      action.courses,
+      {
+        ...state,
+        // una volta che i corsi sono caricati settiamo la
+        // variabile a true
+        allCoursesLoaded: true
+      }))
 );
 
 // selectAll: select all enitites (course)
