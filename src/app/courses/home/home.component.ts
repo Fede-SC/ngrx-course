@@ -10,29 +10,20 @@ import { AppState } from '../../reducers';
 import { select, Store } from '@ngrx/store';
 import { selectAdvancerCourses, selectBeginnerCourses, selectPromoTotal } from '../courses.selector';
 
-
-
 @Component({
   selector: 'home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-
   promoTotal$: Observable<number>;
-
   loading$: Observable<boolean>;
-
   beginnerCourses$: Observable<Course[]>;
-
   advancedCourses$: Observable<Course[]>;
-
 
   constructor(
     private dialog: MatDialog,
-    private store: Store<AppState>) {
-
-  }
+    private store: Store<AppState>) {}
 
   ngOnInit() {
     this.reload();

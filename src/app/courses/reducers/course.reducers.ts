@@ -1,7 +1,7 @@
 import { createEntityAdapter, EntityState } from "@ngrx/entity";
 import { createReducer, on } from "@ngrx/store";
 import { CourseActions } from "../actions-types";
-import { Course } from "../model/course";
+import { compareCourses, Course } from "../model/course";
 
 // estende il model Course
 export interface CoursesState extends EntityState<Course> {
@@ -12,7 +12,10 @@ export interface CoursesState extends EntityState<Course> {
   ids: number[]
 }
 
-export const adapter = createEntityAdapter<Course>();
+export const adapter = createEntityAdapter<Course>({
+  sortComparer: compareCourses,
+  //selectId: course => course.courseId
+});
 
 // questo oggetto ha dele funzioni che fanno in modo di implementare
 // in nostro reduer in modo semplice
