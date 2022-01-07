@@ -82,6 +82,9 @@ const routes: Routes = [
     // nuove fonti di azioni per ridurre
     // lo stato in basea interazioni esterne
     EffectsModule.forRoot([]),
+    // nel nostro course entity andiamo ad associargli il
+    // lazy lodaded module relativo ai corsi
+    // EntityDataModule.forRoot([]),
     // Connette il routermodule con lo store module
     StoreRouterConnectingModule.forRoot({
       stateKey: 'router',
