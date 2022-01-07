@@ -26,12 +26,12 @@ import {compareCourses, Course} from './model/course';
 
 import {compareLessons, Lesson} from './model/lesson';
 import { resolve } from 'dns';
-import { CoursesResolver } from './courses.resolver';
 import { EffectsModule } from '@ngrx/effects';
 import { CoursesEffects } from './courses.effects';
 import { StoreModule } from '@ngrx/store';
 import { coursesReducer } from './reducers/course.reducers';
 import { CourseEntityService } from './services/course-entity.service';
+import { CoursesResolver } from './services/courses.resolver';
 
 
 export const coursesRoutes: Routes = [
