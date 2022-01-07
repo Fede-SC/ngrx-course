@@ -10,7 +10,7 @@ export class CoursesResolver implements Resolve<boolean> {
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
 
-    this.coursesService.loaded$
+    return this.coursesService.loaded$
       .pipe(
         tap(loaded => {
           if (!loaded) {
